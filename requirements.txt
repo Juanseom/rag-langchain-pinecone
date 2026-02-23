@@ -1,0 +1,11 @@
+langchain
+langchain-google-genai
+langchain-pinecone
+langchain-community
+langchain-text-splitters
+langgraph
+beautifulsoup4
+python-dotenv
+
+# In the terminal: pip install -r requirements.txt
+
