@@ -4,14 +4,14 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_pinecone import PineconeVectorStore
 from langchain.chat_models import init_chat_model
 from langchain_core.tools import tool
-from langgraph.prebuilt import create_react_agent
+from langchain.agents import create_agent
 from pinecone import Pinecone
 
 load_dotenv()
 
 
 print("Connecting to Pinecone")
-embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
+embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
 
 pc = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
 index = pc.Index("rag-langchain")
@@ -22,7 +22,7 @@ print("Connected to Pinecone")
 
 print("Setting up Google Gemini model")
 model = init_chat_model(
-    "gemini-2.0-flash",            
+    "gemini-2.5-flash",            
     model_provider="google_genai",  
 )
 print("Model ready")
@@ -52,7 +52,7 @@ system_prompt = (
     "Always use the tool to search for information before answering."
 )
 
-agent = create_react_agent(model, tools, prompt=system_prompt)
+agent = create_agent(model, tools, system_prompt=system_prompt)
 print("Agent created\n")
 
 

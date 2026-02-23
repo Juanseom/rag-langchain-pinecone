@@ -8,7 +8,7 @@ from pinecone import Pinecone
 load_dotenv()
 
 print("Connecting to Pinecone")
-embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
+embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
 
 pc = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
 index = pc.Index("rag-langchain")
@@ -19,7 +19,7 @@ print("Connected to Pinecone")
 
 print("Setting up Google Gemini model")
 model = init_chat_model(
-    "gemini-2.0-flash", 
+    "gemini-2.5-flash", 
     model_provider="google_genai",  
 )
 print("Model ready\n")
